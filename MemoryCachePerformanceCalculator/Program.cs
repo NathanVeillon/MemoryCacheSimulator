@@ -12,7 +12,7 @@ namespace MemoryCachePerformanceCalculator
         {
             public MemoryCacheSimulator MemCache { get; private set; }
             public int CycleUse { get; private set; }
-            public int AmountOfMemoryCalls { get; private set; }
+            public int AmountOfMemoryAddressCalls { get; private set; }
             public Dictionary<int, bool> HitMissRecord { get; private set; }
 
 
@@ -20,7 +20,7 @@ namespace MemoryCachePerformanceCalculator
             {
                 MemCache = memCache;
                 CycleUse = cycleUse;
-                AmountOfMemoryCalls = hitMissRecord.Count;
+                AmountOfMemoryAddressCalls = hitMissRecord.Count;
                 HitMissRecord = hitMissRecord;
             }
 
@@ -28,7 +28,7 @@ namespace MemoryCachePerformanceCalculator
             {
                 string results =
                     "Cycles Taken, " + CycleUse + "\n" +
-                    "Average CPI, " + (double)CycleUse / (double)AmountOfMemoryCalls + "\n"+
+                    "Average CPI, " + (double)CycleUse / (double)AmountOfMemoryAddressCalls + "\n"+
                     MemCache.getCacheStatusAsCsv(verbose);
 
                 if (!verbose) { return results; }
@@ -49,25 +49,28 @@ namespace MemoryCachePerformanceCalculator
             List<CacheResult> bestSetAssociativeCaches = simulateSetAssociativeCaches(addresses, 800, 16, 64);
             List<CacheResult> bestFullyAssociativeCaches = simulateFullyAssociativeCaches(addresses, 800, 64);
 
-            Console.WriteLine("#####################################");
-            Console.WriteLine("##   Best Direct Mapped Cache(s)   ##");
-            Console.WriteLine("#####################################");
-            foreach(CacheResult directResult in bestDirectMappedCaches)
+            //Console.WriteLine("#####################################");
+            //Console.WriteLine("##   Best Direct Mapped Cache(s)   ##");
+            //Console.WriteLine("#####################################");
+            Console.WriteLine("Best Direct Mapped Cache(s)");
+            foreach (CacheResult directResult in bestDirectMappedCaches)
             {
                 Console.WriteLine(directResult.ToCsvString(true));
             }
-
-            Console.WriteLine("#####################################");
-            Console.WriteLine("##  Best Set Associative Cache(s)  ##");
-            Console.WriteLine("#####################################");
-            foreach (CacheResult setAssocResult in bestFullyAssociativeCaches)
+            
+            //Console.WriteLine("#####################################");
+            //Console.WriteLine("##  Best Set Associative Cache(s)  ##");
+            //Console.WriteLine("#####################################");
+            Console.WriteLine("Best Set Associative Cache(s)");
+            foreach (CacheResult setAssocResult in bestSetAssociativeCaches)
             {
                 Console.WriteLine(setAssocResult.ToCsvString(true));
             }
 
-            Console.WriteLine("#####################################");
-            Console.WriteLine("## Best Fully Associative Cache(s) ##");
-            Console.WriteLine("#####################################");
+            //Console.WriteLine("#####################################");
+            //Console.WriteLine("## Best Fully Associative Cache(s) ##");
+            //Console.WriteLine("#####################################");
+            Console.WriteLine("Best Fully Associative Cache(s)");
             foreach (CacheResult fullyAssocResult in bestFullyAssociativeCaches)
             {
                 Console.WriteLine(fullyAssocResult.ToCsvString(true));
