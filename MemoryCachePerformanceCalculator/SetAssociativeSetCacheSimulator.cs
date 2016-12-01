@@ -24,18 +24,6 @@ namespace MemoryCachePerformanceCalculator
             }
         }
 
-        public SetAssociativeSetCacheSimulator(int maxCacheBitSize, int setsPerRow, int bytesPerBlock)
-        {
-            AddressBitSize = 16;
-            BytesPerBlock = bytesPerBlock;
-            SetsPerRow = setsPerRow;
-            NumberOfRows = calculateMaximumNumberOfRows(maxCacheBitSize, setsPerRow, bytesPerBlock);
-
-            BitSize = calculateBitSize(NumberOfRows, SetsPerRow, BytesPerBlock);
-
-            Cache = new CacheRow[NumberOfRows];
-        }
-
         public SetAssociativeSetCacheSimulator(int bytesPerBlock = -1, int numberOfRows = -1, int setsPerRow = -1, int maxCacheBitSize = -1)
         {
             int[] theFeilds = { maxCacheBitSize, numberOfRows, setsPerRow, bytesPerBlock };
