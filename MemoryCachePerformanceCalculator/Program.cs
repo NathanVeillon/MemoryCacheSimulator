@@ -92,12 +92,16 @@ namespace MemoryCachePerformanceCalculator
                 }
                 catch
                 {
+                    //Catch Exceptions If The Block Size Is To Big For The Given Max Bit Size Breaks 
+                    //Because If The A Block Size Is Too Big Then The Next Block Sizes Are Too Big
+                    //For The Given Max Bit Size
                     break;
                 }
 
                 CacheResult newCacheResult = simulateCacheUses(addresses, aCacheSimulator);
 
-                Console.WriteLine(newCacheResult.ToCsvString(false));
+                // Uncomment To Get Log Direct Cache Simulations In The Console
+                //Console.WriteLine(newCacheResult.ToCsvString(true));
 
                 updateBestCacheResults(bestCacheResults, newCacheResult);
             }
@@ -124,10 +128,16 @@ namespace MemoryCachePerformanceCalculator
                     }
                     catch
                     {
+                        //Catch Exceptions If The Block Size Is To Big For The Given Row And Max Bit Size
+                        //Breaks Because If The A Block Size Is Too Big The Then The Next Block Sizes Are Too
+                        //Big For The Given Row And Max Bit Size
                         break;
                     }
 
                     CacheResult newCacheResult = simulateCacheUses(addresses, aCacheSimulator);
+
+                    // Uncomment To Log All Set Associative Simulations In The Console
+                    //Console.WriteLine(newCacheResult.ToCsvString(true));
 
                     updateBestCacheResults(bestCacheResults, newCacheResult);
                 }
@@ -153,10 +163,17 @@ namespace MemoryCachePerformanceCalculator
                 }
                 catch
                 {
+                    //Catch Exceptions If The Block Size Is To Big For The Given Max Bit Size Breaks 
+                    //Because If The A Block Size Is Too Big Then The Next Block Sizes Are Too Big
+                    //For The Given Max Bit Size
                     break;
                 }
 
                 CacheResult newCacheResult = simulateCacheUses(addresses, aCacheSimulator);
+
+
+                // Uncomment To Log All Fully Associative Simulations In The Console
+                //Console.WriteLine(newCacheResult.ToCsvString(true));
 
                 updateBestCacheResults(bestCacheResults, newCacheResult);
             }
